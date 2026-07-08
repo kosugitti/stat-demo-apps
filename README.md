@@ -24,12 +24,16 @@
 
 ## 手元で動かす
 
-R と `shiny` / `ggplot2` / `pacman` パッケージが入っていれば，各アプリのディレクトリを
-指定して起動できます。
+R に次のコードをコピペするだけで，GitHub からソースを取ってきて手元で起動できます
+（初回のみ `install.packages(c("shiny", "ggplot2", "pacman"))` が必要です）。
 
 ```r
-shiny::runApp("mean-ci")
+shiny::runGitHub("stat-demo-apps", "kosugitti", subdir = "mean-ci")    # 母平均の区間推定
+shiny::runGitHub("stat-demo-apps", "kosugitti", subdir = "two-group")  # 2群の平均値差と t 検定
+shiny::runGitHub("stat-demo-apps", "kosugitti", subdir = "cor-test")   # 相関係数の検定
 ```
+
+リポジトリを clone した場合は `shiny::runApp("mean-ci")` のようにディレクトリ指定でも起動できます。
 
 ## ライセンス
 
