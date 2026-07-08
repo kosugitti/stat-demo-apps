@@ -10,8 +10,8 @@
 | ディレクトリ | 内容 | 状態 |
 |---|---|---|
 | `mean-ci/` | 母平均の区間推定（点推定・区間推定・不偏分散・標準誤差・信頼区間の解釈・t分布） | 公開中 |
-| `two-group/` | 2群の平均値差の推定と t 検定 | 予定 |
-| `cor-test/` | 相関係数の検定 | 予定 |
+| `two-group/` | 2群の平均値差の推定と t 検定（効果量とσから2群母集団→標本→差の区間推定→t検定） | 公開中 |
+| `cor-test/` | 相関係数の検定（母相関ρから標本→散布図→t検定，t分布の棄却域と実現値を図示） | 公開中 |
 | `bayes/` | ベイズ推定 | 予定 |
 
 ## ライブデモ
@@ -19,6 +19,8 @@
 学科の計算機サーバ（Shiny Server）で公開しています。
 
 - 母平均の区間推定: https://sv1.psy.senshu-u.ac.jp/kosugi-demo/mean-ci/
+- 2群の平均値差の推定と t 検定: https://sv1.psy.senshu-u.ac.jp/kosugi-demo/two-group/
+- 相関係数の検定: https://sv1.psy.senshu-u.ac.jp/kosugi-demo/cor-test/
 
 ## 手元で動かす
 
