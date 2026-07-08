@@ -48,11 +48,9 @@ server <- function(input, output, session) {
 
   rv <- reactiveValues(pop = NULL, idx = NULL, show = FALSE)
 
-  rho_eff <- reactive(if (input$popmode == "null") 0 else input$rho)
-
   # 母集団(点群)を生成 → そこから標本を抜く
   gen_pop <- function() {
-    rho <- rho_eff()
+    rho <- input$rho
     x <- rnorm(NPOP); z <- rnorm(NPOP)
     y <- rho * x + sqrt(1 - rho^2) * z
     rv$pop <- data.frame(x = x, y = y)
@@ -65,8 +63,16 @@ server <- function(input, output, session) {
   }
 
   observe({ if (is.null(rv$pop)) gen_pop() })                 # 初期化
-  observeEvent(list(input$rho, input$popmode), gen_pop(),     # 母集団が変わったら作り直し
-               ignoreInit = TRUE)
+  # 帰無分布を選んだら ρ スライダを自動的に 0 にセットする
+  observeEvent(input$popmode, {
+    if (input$popmode == "null") updateSliderInput(session, "rho", value = 0)
+  }, ignoreInit = TRUE)
+  # ρ が変わったら母集団を作り直す。帰無分布モードで 0 以外に動かしたら「設定した ρ」に戻す
+  observeEvent(input$rho, {
+    if (input$rho != 0 && input$popmode == "null")
+      updateRadioButtons(session, "popmode", selected = "rho")
+    gen_pop()
+  }, ignoreInit = TRUE)
   observeEvent(input$n, {                                     # n だけ変えたら抜き直し
     if (!is.null(rv$pop)) resample_idx()
   }, ignoreInit = TRUE)
